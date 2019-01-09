@@ -1,25 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style="height:100%">
 <head>
 	<meta charset="UTF-8">
-	<link rel="stylesheet" href="./font/style.css">
+	<link rel="stylesheet" href="./fonts/style.css">
+	<script src="https://shalayou.github.io/jquery-/jquery.min.js"></script>
 	<title>Document</title>
+	<style>
+		body{margin:0;padding:0;width:100%;height:100%;}
+		ul{margin-top:20px;padding:0;}
+		li{list-style: none;width:60px;height:60px;margin:0 0 20px 20px;background:#f5f5f5;float:left;line-height: 64.5px;text-align:center;vertical-align: middle;border-radius: 4px;}
+		span{font-size: 24px;margin:0;}
+		input{display: block;border: none;width: 39%;height: 30px;background: transparent;line-height: 30px;text-indent: 30px;
+		float:left;padding:0 5%;height:30px;font-size: 14px;}
+		.active1{background:yellow;}
+	</style>
 </head>
 <body>
-	<i class="icon-appraise" style="font-size:20px;color:blue;"></i>
-	<i class="icon-bridge" style="font-size:20px;color:blue;"></i>
-	<i class="icon-car" style="font-size:20px;color:blue;"></i>
-	<i class="icon-check" style="font-size:20px;color:blue;"></i>
-	<i class="icon-daily" style="font-size:20px;color:blue;"></i>
-	<i class="icon-data" style="font-size:20px;color:blue;"></i>
-	<i class="icon-email" style="font-size:20px;color:blue;"></i>
-	<i class="icon-information" style="font-size:20px;color:blue;"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span></i>
-	<i class="icon-machine" style="font-size:20px;color:blue;"></i>
-	<i class="icon-news" style="font-size:20px;color:blue;"></i>
-	<i class="icon-other" style="font-size:20px;color:blue;"></i>
-	<i class="icon-pwd" style="font-size:20px;color:blue;"></i>
-	<i class="icon-repair " style="font-size:20px;color:blue;"><span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span></i>
-	<i class="icon-search" style="font-size:20px;color:blue;"></i>
-	<i class="icon-user" style="font-size:20px;color:blue;"></i>
+	<div class="left" style="float:left;width:40%;height:100%;background:#f5f5f5;overflow:auto;">
+	</div>
+	<div class="right" style="float:right;width:60%;height:100%;background:#fff;">
+		<ul>
+	</ul>
+	</div>
+	<div style="display:none" id="addItem">
+		<p>airCondition,appraise,bag,bank,barbecue,bath,bed,blackboard,book,bookCity,bridge,business,cabinet,car,cat,check,chicken,Cljl,Clmj,clock,cloud,cola,collect,cow,credit,curve,daily,data,Del,dog,drink,drumstick,dryer,Dw,dynamic,email,file,football,free,hamburg,hangers,hat,honeycomb,information,label,labor,like,listenBook,machine,magnify,me,medal,mine,mobileWallet,music,new,news,other,petals,pool,popsicle,pwd,Qjyx,ql,Quit,rabbit,rectangular,refrigerator,repair,reticule,sales,savings,sd,seach,search,security,shoppingCart,shrink,sneaker,sofa,special,state,steel,Tccd,trend,trousers,T-shirt,turnLeft,turnRight,user,van,wallet,washing,Zhcx</p>
+	</div>
 </body>
+<script>
+	$(function(){
+		var fuzhi = {
+			addLi:function(){
+				var p = $("#addItem").find("p").html();
+				var str1 = p.split(",");
+				console.log(str1[0]);
+				for(var i=0;i<str1.length;i++){
+					$(".right").find("ul").append('<li tabindex="-1"><span class="icon-'+str1[i]+'"></span></li>');
+					console.log('<li tabindex="-1"><span class="icon-'+str1[i]+'"></span></li>');
+				}
+			},
+			set:function(){
+				for(var i=0;i<$("li").length;i++){
+					$('.left').append('<input type="text">');
+					$("input").eq(i).val($("li").eq(i).html());
+				}
+			},
+			inputHover:function(){
+				$("input").focus(function(){
+					var index=$(this).index();
+					$(this).css("background","#fff");
+					$("li").removeClass("active1");
+					$("li").eq(index).addClass("active1");
+					console.log(1);
+				});
+				$("input").blur(function(){
+					$(this).css("background","transparent");
+					$("li").removeClass("active1");
+					console.log(2);
+				});	
+			},
+			liHover:function(){
+				$("li").focus(function(){
+					var index=$(this).index();
+					$(this).css("background","yellow");
+					$("input").css({"background":"transparent","border":"1px solid transparent"});
+					$("input").eq(index).css({"background":"#fff","border":"1px solid yellow"});
+					console.log(1);
+				});
+				$("li").blur(function(){
+					$(this).css("background","#f5f5f5");
+					$("input").css({"background":"transparent","border":"1px solid transparent"});
+					console.log(2);
+				});	
+			},
+		}
+		fuzhi.addLi();
+		fuzhi.set();
+		fuzhi.inputHover();
+		fuzhi.liHover();
+	});
+</script>
 </html>
